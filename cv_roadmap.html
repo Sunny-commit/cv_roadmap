@@ -212,8 +212,8 @@
         const chartColors = {
             'phase-1': 'rgba(59, 130, 246, 1)',
             'phase-2': 'rgba(16, 185, 129, 1)',
-            'phase-3': 'rgba(239, 68, 68, 1)',
-            'phase-4': 'rgba(249, 115, 22, 1)'
+            'phase-3': 'rgba(239, 68, 68, 0.5)',
+            'phase-4': 'rgba(249, 115, 22, 0.5)'
         };
         
         let roadmapChart;
@@ -227,7 +227,7 @@
                 contentDisplay.innerHTML = `
                     <h2 class="text-3xl font-bold text-slate-900 mb-2">${data.title}</h2>
                     <p class="text-lg text-slate-600 mb-6">${data.description}</p>
-                    <div class="flex space-x-4 mb-8">
+                    <div class="flex flex-wrap gap-4 mb-8">
                         <button data-filter="all" class="filter-btn bg-blue-600 text-white px-6 py-2 rounded-2xl font-medium shadow-md hover:bg-blue-700 transition-colors">All</button>
                         <button data-filter="beginner" class="filter-btn bg-slate-200 text-slate-700 px-6 py-2 rounded-2xl font-medium shadow-md hover:bg-slate-300 transition-colors">Beginner</button>
                         <button data-filter="intermediate" class="filter-btn bg-slate-200 text-slate-700 px-6 py-2 rounded-2xl font-medium shadow-md hover:bg-slate-300 transition-colors">Intermediate</button>
@@ -269,7 +269,7 @@
                     <h2 class="text-3xl font-bold text-slate-900 mb-2">${data.title}</h2>
                     <p class="text-lg text-slate-600 mb-8">${data.description}</p>
                     <div id="topic-list" class="space-y-4"></div>
-                    <div id="topic-detail" class="mt-8 bg-slate-50 p-6 rounded-3xl border border-slate-200"></div>
+                    <div id="topic-detail" class="mt-8 bg-slate-50 p-6 rounded-3xl border border-slate-200" style="display:none;"></div>
                 `;
                 const topicList = document.getElementById('topic-list');
                 data.topics.forEach((topic, index) => {
@@ -296,6 +296,7 @@
                             ${topic.resources.map(r => `<li><a href="${r.url}" target="_blank" class="text-blue-600 hover:underline">${r.name} →</a></li>`).join('')}
                         </ul>
                     `;
+                    topicDetail.style.display = 'block';
                 }
 
                 document.querySelectorAll('.topic-item').forEach(btn => {
