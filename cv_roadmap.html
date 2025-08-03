@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced CV Learning Roadmap</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Calm Focus -->
     <!-- Application Structure Plan: The application uses a dynamic, dashboard-style layout designed for focused exploration. The top section features a brief overview and a high-level bar chart of the four learning phases. Below this, a two-column grid creates the core interactive experience: a left-hand navigation panel lists topics, while a main content panel on the right dynamically updates with detailed information for the selected topic. This structure breaks away from a linear scroll, allowing users to jump directly to specific topics of interest without information overload. This design was chosen to make the vast amount of information manageable and highly interactive, aligning with a modern, non-linear learning style. The projects section is also dynamic, with filters to sort by difficulty. -->
     <!-- Visualization & Content Choices:
@@ -22,405 +19,212 @@
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #f8fafc; /* slate-50 */
-      }
-      .chart-container {
-        position: relative;
-        width: 100%;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-        height: 250px;
-        max-height: 300px;
-      }
-      @media (min-width: 768px) {
-        .chart-container {
-          height: 300px;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
         }
-      }
-      .list-item-active {
-        background-color: #e2e8f0; /* slate-200 */
-        font-weight: 600;
-        color: #1e293b;
-      }
-      .project-card.hide {
-        display: none;
-      }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+            max-height: 300px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .list-item-active {
+            background-color: #e2e8f0; /* slate-200 */
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .project-card.hide {
+            display: none;
+        }
     </style>
-  </head>
-  <body class="text-slate-800">
+</head>
+<body class="text-slate-800">
+
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-      <section class="text-center mb-12 md:mb-16">
-        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-          Mastering Computer Vision
-        </h1>
-        <p class="max-w-3xl mx-auto text-lg text-slate-600">
-          Your interactive guide from beginner to expert, with detailed topics,
-          models, and resources. Explore the path, one step at a time.
-        </p>
-      </section>
-
-      <section class="mb-12 md:mb-16">
-        <h2 class="text-2xl font-bold text-slate-900 text-center mb-4">
-          Roadmap Overview by Duration
-        </h2>
-        <div
-          class="chart-container bg-white p-4 rounded-3xl shadow-xl border border-slate-200"
-        >
-          <canvas id="roadmap-chart"></canvas>
-        </div>
-      </section>
-
-      <div id="dashboard" class="grid lg:grid-cols-4 gap-8">
-        <aside
-          class="lg:col-span-1 bg-white p-6 rounded-3xl shadow-xl border border-slate-200 h-fit sticky top-20"
-        >
-          <h3 class="text-2xl font-bold text-slate-900 mb-4">
-            Learning Phases
-          </h3>
-          <nav>
-            <ul class="space-y-2">
-              <li>
-                <button
-                  data-phase="phase-1"
-                  class="phase-link w-full text-left p-3 rounded-2xl transition-colors hover:bg-slate-100 list-item-active"
-                >
-                  Phase 1: Foundations
-                </button>
-              </li>
-              <li>
-                <button
-                  data-phase="phase-2"
-                  class="phase-link w-full text-left p-3 rounded-2xl transition-colors hover:bg-slate-100"
-                >
-                  Phase 2: Intermediate CV
-                </button>
-              </li>
-              <li>
-                <button
-                  data-phase="phase-3"
-                  class="phase-link w-full text-left p-3 rounded-2xl transition-colors hover:bg-slate-100"
-                >
-                  Phase 3: Deep Learning
-                </button>
-              </li>
-              <li>
-                <button
-                  data-phase="phase-4"
-                  class="phase-link w-full text-left p-3 rounded-2xl transition-colors hover:bg-slate-100"
-                >
-                  Phase 4: Specialization
-                </button>
-              </li>
-              <li>
-                <button
-                  data-phase="projects"
-                  class="phase-link w-full text-left p-3 rounded-2xl transition-colors hover:bg-slate-100"
-                >
-                  Recommended Projects
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </aside>
-
-        <section
-          id="content-display"
-          class="lg:col-span-3 bg-white p-8 rounded-3xl shadow-xl border border-slate-200"
-        >
-          <div id="phase-content">
-            <!-- Dynamic content will be loaded here -->
-          </div>
+        <section class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Mastering Computer Vision</h1>
+            <p class="max-w-3xl mx-auto text-lg text-slate-600">Your interactive guide from beginner to expert, with detailed topics, models, and resources. Explore the path, one step at a time.</p>
         </section>
-      </div>
+
+        <section class="mb-12 md:mb-16">
+             <h2 class="text-2xl font-bold text-slate-900 text-center mb-4">Roadmap Overview by Duration</h2>
+             <div class="chart-container bg-white p-4 rounded-3xl shadow-xl border border-slate-200">
+                <canvas id="roadmap-chart"></canvas>
+            </div>
+        </section>
+
+        <div id="dashboard" class="grid lg:grid-cols-4 gap-8">
+            <aside class="lg:col-span-1 bg-white p-6 rounded-3xl shadow-xl border border-slate-200 h-fit sticky top-20">
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">Learning Phases</h3>
+                <nav>
+                    <ul class="space-y-2">
+                        <li><button data-phase="phase-1" class="phase-link w-full text-left p-3 rounded-2xl transition-colors hover:bg-slate-100 list-item-active">Phase 1: Foundations</button></li>
+                        <li><button data-phase="phase-2" class="phase-link w-full text-left p-3 rounded-2xl transition-colors hover:bg-slate-100">Phase 2: Intermediate CV</button></li>
+                        <li><button data-phase="phase-3" class="phase-link w-full text-left p-3 rounded-2xl transition-colors hover:bg-slate-100">Phase 3: Deep Learning</button></li>
+                        <li><button data-phase="phase-4" class="phase-link w-full text-left p-3 rounded-2xl transition-colors hover:bg-slate-100">Phase 4: Specialization</button></li>
+                        <li><button data-phase="projects" class="phase-link w-full text-left p-3 rounded-2xl transition-colors hover:bg-slate-100">Recommended Projects</button></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <section id="content-display" class="lg:col-span-3 bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
+                <div id="phase-content">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer class="bg-slate-100 border-t border-slate-200 mt-16">
-      <div
-        class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-slate-500"
-      >
-        <p>
-          &copy; 2025 Interactive CV Roadmap. An enhanced learning experience.
-        </p>
-      </div>
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-slate-500">
+            <p>&copy; 2025 Interactive CV Roadmap. An enhanced learning experience.</p>
+        </div>
     </footer>
 
     <script>
-      const roadmapData = {
-        "phase-1": {
-          title: "Phase 1: Foundations of Computer Vision (Weeks 1-4)",
-          description:
-            "This phase is about building a solid base. You’ll begin with core Python and NumPy skills, then move on to fundamental image processing techniques using OpenCV. This foundational knowledge is essential for understanding more complex topics later on.",
-          topics: [
-            {
-              name: "Python & NumPy Fundamentals",
-              explanation:
-                "The building blocks for any computer vision project in Python. NumPy provides a powerful N-dimensional array object and tools for integrating C/C++ code. It is the de-facto standard for numerical operations.",
-              models: ["Not applicable"],
-              resources: [
-                {
-                  name: "NumPy Quickstart Guide",
-                  url: "https://github.com/numpy/numpy",
-                },
-              ],
+        const roadmapData = {
+            'phase-1': {
+                title: 'Phase 1: Foundations of Computer Vision (Weeks 1-4)',
+                description: 'This phase is about building a solid base. You’ll begin with core Python and NumPy skills, then move on to fundamental image processing techniques using OpenCV. This foundational knowledge is essential for understanding more complex topics later on.',
+                topics: [
+                    {
+                        name: 'Python & NumPy Fundamentals',
+                        explanation: 'The building blocks for any computer vision project in Python. NumPy provides a powerful N-dimensional array object and tools for integrating C/C++ code. It is the de-facto standard for numerical operations.',
+                        models: ['Not applicable'],
+                        resources: [{ name: 'NumPy Quickstart Guide', url: 'https://github.com/numpy/numpy' }]
+                    },
+                    {
+                        name: 'OpenCV Basics & Image I/O',
+                        explanation: 'Learn how to read, display, and save images and video streams. Understand the basic structure of an image as a NumPy array and how to manipulate its pixels.',
+                        models: ['None'],
+                        resources: [{ name: 'Learn OpenCV GitHub', url: 'https://github.com/opencv/opencv' }]
+                    },
+                    {
+                        name: 'Image Processing Techniques',
+                        explanation: 'Explore foundational algorithms like color space conversions (RGB to HSV), thresholding (binary and adaptive), filtering (blurring, sharpening), and morphological operations (erosion, dilation).',
+                        models: ['Thresholding algorithms', 'Various blur kernels'],
+                        resources: [{ name: 'OpenCV-Python Tutorials', url: 'https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html' }]
+                    }
+                ]
             },
-            {
-              name: "OpenCV Basics & Image I/O",
-              explanation:
-                "Learn how to read, display, and save images and video streams. Understand the basic structure of an image as a NumPy array and how to manipulate its pixels.",
-              models: ["None"],
-              resources: [
-                {
-                  name: "Learn OpenCV GitHub",
-                  url: "https://github.com/opencv/opencv",
-                },
-              ],
+            'phase-2': {
+                title: 'Phase 2: Intermediate Traditional Computer Vision (Weeks 5-8)',
+                description: 'This phase moves beyond basic image manipulation to understanding and extracting meaningful features from an image. You will learn classical algorithms for finding points of interest, detecting edges, and tracking objects.',
+                topics: [
+                    {
+                        name: 'Feature Detection & Description',
+                        explanation: 'Learn how to identify key points in an image that are invariant to changes in scale, rotation, or lighting. These features are crucial for tasks like image stitching and object recognition.',
+                        models: ['Harris Corner Detector', 'Canny Edge Detector', 'ORB (Oriented FAST and Rotated BRIEF)'],
+                        resources: [{ name: 'OpenCV Features2D', url: 'https://github.com/opencv/opencv/tree/master/modules/features2d' }]
+                    },
+                    {
+                        name: 'Homography & Image Alignment',
+                        explanation: 'Understand the concept of homography, a transformation that maps points from one plane to another. This is the core technique for stitching multiple images together to create panoramas.',
+                        models: ['RANSAC (Random Sample Consensus)'],
+                        resources: [{ name: 'OpenCV Stitching Module', url: 'https://github.com/opencv/opencv/tree/master/modules/stitching' }]
+                    },
+                    {
+                        name: 'Object Detection & Tracking',
+                        explanation: 'Explore traditional methods for finding objects in images and following them through video frames. These methods, while less accurate than deep learning, provide a strong conceptual foundation.',
+                        models: ['Haar Cascades', 'Mean-shift/CAMShift', 'Lucas-Kanade optical flow'],
+                        resources: [{ name: 'OpenCV Object Detection', url: 'https://github.com/opencv/opencv/tree/master/modules/objdetect' }]
+                    }
+                ]
             },
-            {
-              name: "Image Processing Techniques",
-              explanation:
-                "Explore foundational algorithms like color space conversions (RGB to HSV), thresholding (binary and adaptive), filtering (blurring, sharpening), and morphological operations (erosion, dilation).",
-              models: ["Thresholding algorithms", "Various blur kernels"],
-              resources: [
-                {
-                  name: "OpenCV-Python Tutorials",
-                  url: "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html",
-                },
-              ],
+            'phase-3': {
+                title: 'Phase 3: The Deep Learning Revolution (Weeks 9-16)',
+                description: 'This is the most critical and intensive phase. You will dive into modern deep learning techniques that have become the standard for state-of-the-art computer vision. You will learn to build and train powerful neural networks for complex tasks.',
+                topics: [
+                    {
+                        name: 'CNN Fundamentals',
+                        explanation: 'Understand the core of Convolutional Neural Networks (CNNs). Learn about the convolution operation, pooling layers, and fully connected layers. This is the foundation for almost all modern vision models.',
+                        models: ['LeNet', 'AlexNet'],
+                        resources: [{ name: 'TensorFlow Docs on CNNs', url: 'https://github.com/tensorflow/tensorflow' }]
+                    },
+                    {
+                        name: 'Transfer Learning & Fine-Tuning',
+                        explanation: 'Instead of training from scratch, you will learn to leverage powerful pre-trained models. This technique allows you to achieve high accuracy on new tasks with limited data.',
+                        models: ['ResNet', 'VGG', 'Inception'],
+                        resources: [{ name: 'Keras Applications', url: 'https://keras.io/api/applications/' }]
+                    },
+                    {
+                        name: 'Modern Object Detection',
+                        explanation: 'Master modern object detection frameworks that can identify multiple objects in an image and draw bounding boxes around them. This is a crucial skill for real-world applications.',
+                        models: ['R-CNN family (Faster R-CNN, Mask R-CNN)', 'YOLO (You Only Look Once) family'],
+                        resources: [{ name: 'YOLOv8 GitHub', url: 'https://github.com/ultralytics/yolov5' }]
+                    },
+                    {
+                        name: 'Image Segmentation',
+                        explanation: 'Move beyond bounding boxes to pixel-level understanding. Semantic segmentation classifies each pixel of an image, while instance segmentation distinguishes between individual instances of the same class.',
+                        models: ['U-Net', 'Mask R-CNN'],
+                        resources: [{ name: 'PyTorch Tutorials', url: 'https://github.com/pytorch/tutorials' }]
+                    },
+                    {
+                        name: 'Generative Models',
+                        explanation: 'Explore how to create new images and data. Generative Adversarial Networks (GANs) are a powerful class of models used for image generation, style transfer, and data augmentation.',
+                        models: ['GANs', 'VAE (Variational Autoencoders)'],
+                        resources: [{ name: 'Awesome GANs List', url: 'https://github.com/nashory/gans-awesome-resources' }]
+                    }
+                ]
             },
-          ],
-        },
-        "phase-2": {
-          title:
-            "Phase 2: Intermediate Traditional Computer Vision (Weeks 5-8)",
-          description:
-            "This phase moves beyond basic image manipulation to understanding and extracting meaningful features from an image. You will learn classical algorithms for finding points of interest, detecting edges, and tracking objects.",
-          topics: [
-            {
-              name: "Feature Detection & Description",
-              explanation:
-                "Learn how to identify key points in an image that are invariant to changes in scale, rotation, or lighting. These features are crucial for tasks like image stitching and object recognition.",
-              models: [
-                "Harris Corner Detector",
-                "Canny Edge Detector",
-                "ORB (Oriented FAST and Rotated BRIEF)",
-              ],
-              resources: [
-                {
-                  name: "OpenCV Features2D",
-                  url: "https://github.com/opencv/opencv/tree/master/modules/features2d",
-                },
-              ],
+            'phase-4': {
+                title: 'Phase 4: Specializations and Real-World Applications (Weeks 17+)',
+                description: 'The final phase is about applying your knowledge to a specific domain and preparing for real-world deployment. You will build a portfolio-worthy project from start to finish and learn how to make it accessible to others.',
+                topics: [
+                    {
+                        name: 'Final Project Implementation',
+                        explanation: 'Choose a significant project that combines multiple skills you have learned. This is your chance to solidify your expertise and create a standout portfolio piece.',
+                        models: ['Any model from Phase 3'],
+                        resources: [{ name: 'Kaggle Competitions', url: 'https://www.kaggle.com/competitions' }]
+                    },
+                    {
+                        name: 'Model Deployment',
+                        explanation: 'Learning to deploy your model is just as important as building it. Learn how to package your model and serve it via a web API using frameworks like Flask or FastAPI.',
+                        models: ['Not applicable'],
+                        resources: [{ name: 'Flask Documentation', url: 'https://flask.palletsprojects.com/en/latest/' }]
+                    }
+                ]
             },
-            {
-              name: "Homography & Image Alignment",
-              explanation:
-                "Understand the concept of homography, a transformation that maps points from one plane to another. This is the core technique for stitching multiple images together to create panoramas.",
-              models: ["RANSAC (Random Sample Consensus)"],
-              resources: [
-                {
-                  name: "OpenCV Stitching Module",
-                  url: "https://github.com/opencv/opencv/tree/master/modules/stitching",
-                },
-              ],
-            },
-            {
-              name: "Object Detection & Tracking",
-              explanation:
-                "Explore traditional methods for finding objects in images and following them through video frames. These methods, while less accurate than deep learning, provide a strong conceptual foundation.",
-              models: [
-                "Haar Cascades",
-                "Mean-shift/CAMShift",
-                "Lucas-Kanade optical flow",
-              ],
-              resources: [
-                {
-                  name: "OpenCV Object Detection",
-                  url: "https://github.com/opencv/opencv/tree/master/modules/objdetect",
-                },
-              ],
-            },
-          ],
-        },
-        "phase-3": {
-          title: "Phase 3: The Deep Learning Revolution (Weeks 9-16)",
-          description:
-            "This is the most critical and intensive phase. You will dive into modern deep learning techniques that have become the standard for state-of-the-art computer vision. You will learn to build and train powerful neural networks for complex tasks.",
-          topics: [
-            {
-              name: "CNN Fundamentals",
-              explanation:
-                "Understand the core of Convolutional Neural Networks (CNNs). Learn about the convolution operation, pooling layers, and fully connected layers. This is the foundation for almost all modern vision models.",
-              models: ["LeNet", "AlexNet"],
-              resources: [
-                {
-                  name: "TensorFlow Docs on CNNs",
-                  url: "https://github.com/tensorflow/tensorflow",
-                },
-              ],
-            },
-            {
-              name: "Transfer Learning & Fine-Tuning",
-              explanation:
-                "Instead of training from scratch, you will learn to leverage powerful pre-trained models. This technique allows you to achieve high accuracy on new tasks with limited data.",
-              models: ["ResNet", "VGG", "Inception"],
-              resources: [
-                {
-                  name: "Keras Applications",
-                  url: "https://keras.io/api/applications/",
-                },
-              ],
-            },
-            {
-              name: "Modern Object Detection",
-              explanation:
-                "Master modern object detection frameworks that can identify multiple objects in an image and draw bounding boxes around them. This is a crucial skill for real-world applications.",
-              models: [
-                "R-CNN family (Faster R-CNN, Mask R-CNN)",
-                "YOLO (You Only Look Once) family",
-              ],
-              resources: [
-                {
-                  name: "YOLOv8 GitHub",
-                  url: "https://github.com/ultralytics/yolov5",
-                },
-              ],
-            },
-            {
-              name: "Image Segmentation",
-              explanation:
-                "Move beyond bounding boxes to pixel-level understanding. Semantic segmentation classifies each pixel of an image, while instance segmentation distinguishes between individual instances of the same class.",
-              models: ["U-Net", "Mask R-CNN"],
-              resources: [
-                {
-                  name: "PyTorch Tutorials",
-                  url: "https://github.com/pytorch/tutorials",
-                },
-              ],
-            },
-            {
-              name: "Generative Models",
-              explanation:
-                "Explore how to create new images and data. Generative Adversarial Networks (GANs) are a powerful class of models used for image generation, style transfer, and data augmentation.",
-              models: ["GANs", "VAE (Variational Autoencoders)"],
-              resources: [
-                {
-                  name: "Awesome GANs List",
-                  url: "https://github.com/nashory/gans-awesome-resources",
-                },
-              ],
-            },
-          ],
-        },
-        "phase-4": {
-          title:
-            "Phase 4: Specializations and Real-World Applications (Weeks 17+)",
-          description:
-            "The final phase is about applying your knowledge to a specific domain and preparing for real-world deployment. You will build a portfolio-worthy project from start to finish and learn how to make it accessible to others.",
-          topics: [
-            {
-              name: "Final Project Implementation",
-              explanation:
-                "Choose a significant project that combines multiple skills you have learned. This is your chance to solidify your expertise and create a standout portfolio piece.",
-              models: ["Any model from Phase 3"],
-              resources: [
-                {
-                  name: "Kaggle Competitions",
-                  url: "https://www.kaggle.com/competitions",
-                },
-              ],
-            },
-            {
-              name: "Model Deployment",
-              explanation:
-                "Learning to deploy your model is just as important as building it. Learn how to package your model and serve it via a web API using frameworks like Flask or FastAPI.",
-              models: ["Not applicable"],
-              resources: [
-                {
-                  name: "Flask Documentation",
-                  url: "https://flask.palletsprojects.com/en/latest/",
-                },
-              ],
-            },
-          ],
-        },
-        projects: {
-          title: "Recommended Projects for Practice",
-          description:
-            "These projects are curated to help you apply the concepts learned in each phase. Start with the beginner projects and work your way up to solidify your understanding and build a strong portfolio.",
-          projects: [
-            {
-              name: "Basic Drawing App with OpenCV",
-              difficulty: "beginner",
-              explanation:
-                "A simple app that lets you draw on a blank canvas, switch between colors, and save the image. Uses basic OpenCV functions.",
-              github: "https://github.com/cv-projects/drawing-app",
-            },
-            {
-              name: "Real-time Face Detector",
-              difficulty: "beginner",
-              explanation:
-                "Use a pre-trained Haar Cascade classifier to detect faces in a live webcam feed. Focuses on classical object detection.",
-              github: "https://github.com/cv-projects/face-detector",
-            },
-            {
-              name: "Image Stitching & Panoramas",
-              difficulty: "intermediate",
-              explanation:
-                "Combine multiple overlapping images into a single panorama. This requires understanding feature detection, matching, and homography.",
-              github: "https://github.com/cv-projects/image-stitcher",
-            },
-            {
-              name: "Object Tracking with CAMShift",
-              difficulty: "intermediate",
-              explanation:
-                "Track a specific colored object in a video stream. A great project to understand traditional tracking algorithms.",
-              github: "https://github.com/cv-projects/camshift-tracker",
-            },
-            {
-              name: "Real-Time Object Detection (YOLO)",
-              difficulty: "advanced",
-              explanation:
-                "Use a pre-trained YOLO model to detect objects from a webcam. A perfect project to demonstrate modern deep learning skills.",
-              github: "https://github.com/cv-projects/yolo-detector",
-            },
-            {
-              name: "Medical Image Segmentation",
-              difficulty: "advanced",
-              explanation:
-                "Use a U-Net model to perform semantic segmentation on medical images (e.g., cell nuclei).",
-              github: "https://github.com/cv-projects/medical-segmentation",
-            },
-            {
-              name: "Neural Style Transfer",
-              difficulty: "advanced",
-              explanation:
-                "Build a model that can apply the artistic style of one image to the content of another. A creative application of deep learning.",
-              github: "https://github.com/cv-projects/style-transfer",
-            },
-          ],
-        },
-      };
+            'projects': {
+                title: 'Recommended Projects for Practice',
+                description: 'These projects are curated to help you apply the concepts learned in each phase. Start with the beginner projects and work your way up to solidify your understanding and build a strong portfolio.',
+                projects: [
+                    { name: 'Basic Drawing App with OpenCV', difficulty: 'beginner', explanation: 'A simple app that lets you draw on a blank canvas, switch between colors, and save the image. Uses basic OpenCV functions.', github: 'https://github.com/cv-projects/drawing-app' },
+                    { name: 'Real-time Face Detector', difficulty: 'beginner', explanation: 'Use a pre-trained Haar Cascade classifier to detect faces in a live webcam feed. Focuses on classical object detection.', github: 'https://github.com/cv-projects/face-detector' },
+                    { name: 'Image Stitching & Panoramas', difficulty: 'intermediate', explanation: 'Combine multiple overlapping images into a single panorama. This requires understanding feature detection, matching, and homography.', github: 'https://github.com/cv-projects/image-stitcher' },
+                    { name: 'Object Tracking with CAMShift', difficulty: 'intermediate', explanation: 'Track a specific colored object in a video stream. A great project to understand traditional tracking algorithms.', github: 'https://github.com/cv-projects/camshift-tracker' },
+                    { name: 'Real-Time Object Detection (YOLO)', difficulty: 'advanced', explanation: 'Use a pre-trained YOLO model to detect objects from a webcam. A perfect project to demonstrate modern deep learning skills.', github: 'https://github.com/cv-projects/yolo-detector' },
+                    { name: 'Medical Image Segmentation', difficulty: 'advanced', explanation: 'Use a U-Net model to perform semantic segmentation on medical images (e.g., cell nuclei).', github: 'https://github.com/cv-projects/medical-segmentation' },
+                    { name: 'Neural Style Transfer', difficulty: 'advanced', explanation: 'Build a model that can apply the artistic style of one image to the content of another. A creative application of deep learning.', github: 'https://github.com/cv-projects/style-transfer' }
+                ]
+            }
+        };
 
-      const chartColors = {
-        "phase-1": "rgba(59, 130, 246, 1)",
-        "phase-2": "rgba(16, 185, 129, 1)",
-        "phase-3": "rgba(239, 68, 68, 1)",
-        "phase-4": "rgba(249, 115, 22, 1)",
-      };
+        const chartColors = {
+            'phase-1': 'rgba(59, 130, 246, 1)',
+            'phase-2': 'rgba(16, 185, 129, 1)',
+            'phase-3': 'rgba(239, 68, 68, 1)',
+            'phase-4': 'rgba(249, 115, 22, 1)'
+        };
+        
+        let roadmapChart;
 
-      let roadmapChart;
+        function loadContent(phaseKey) {
+            const contentDisplay = document.getElementById('phase-content');
+            
+            const data = roadmapData[phaseKey];
 
-      function loadContent(phaseKey) {
-        const contentDisplay = document.getElementById("phase-content");
-        contentDisplay.innerHTML = "";
-
-        const data = roadmapData[phaseKey];
-
-        if (phaseKey === "projects") {
-          contentDisplay.innerHTML = `
+            if (phaseKey === 'projects') {
+                contentDisplay.innerHTML = `
                     <h2 class="text-3xl font-bold text-slate-900 mb-2">${data.title}</h2>
                     <p class="text-lg text-slate-600 mb-6">${data.description}</p>
                     <div class="flex space-x-4 mb-8">
@@ -431,175 +235,153 @@
                     </div>
                     <div id="project-list" class="grid sm:grid-cols-2 gap-6"></div>
                 `;
-          const projectList = document.getElementById("project-list");
-          data.projects.forEach((project) => {
-            const card = document.createElement("div");
-            card.className = `project-card bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-200 transition-transform hover:scale-[1.02] ${project.difficulty}`;
-            card.innerHTML = `
+                const projectList = document.getElementById('project-list');
+                data.projects.forEach(project => {
+                    const card = document.createElement('div');
+                    card.className = `project-card bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-200 transition-transform hover:scale-[1.02] ${project.difficulty}`;
+                    card.innerHTML = `
                         <h3 class="text-xl font-semibold text-blue-700 mb-2">${project.name}</h3>
                         <p class="text-sm font-medium text-slate-500 mb-3 capitalize">${project.difficulty} Level</p>
                         <p class="text-slate-600 mb-4">${project.explanation}</p>
                         <a href="${project.github}" target="_blank" class="inline-block text-blue-600 font-medium hover:underline">GitHub Source →</a>
                     `;
-            projectList.appendChild(card);
-          });
+                    projectList.appendChild(card);
+                });
 
-          document.querySelectorAll(".filter-btn").forEach((btn) => {
-            btn.addEventListener("click", (e) => {
-              const filter = e.target.getAttribute("data-filter");
-              document.querySelectorAll(".project-card").forEach((card) => {
-                if (filter === "all" || card.classList.contains(filter)) {
-                  card.classList.remove("hide");
-                } else {
-                  card.classList.add("hide");
-                }
-              });
-              document
-                .querySelectorAll(".filter-btn")
-                .forEach((b) =>
-                  b.classList.remove("bg-blue-600", "text-white")
-                );
-              document
-                .querySelectorAll(".filter-btn")
-                .forEach((b) =>
-                  b.classList.add("bg-slate-200", "text-slate-700")
-                );
-              e.target.classList.remove("bg-slate-200", "text-slate-700");
-              e.target.classList.add("bg-blue-600", "text-white");
-            });
-          });
-        } else {
-          contentDisplay.innerHTML = `
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const filter = e.target.getAttribute('data-filter');
+                        document.querySelectorAll('.project-card').forEach(card => {
+                            if (filter === 'all' || card.classList.contains(filter)) {
+                                card.classList.remove('hide');
+                            } else {
+                                card.classList.add('hide');
+                            }
+                        });
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('bg-blue-600', 'text-white'));
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.add('bg-slate-200', 'text-slate-700'));
+                        e.target.classList.remove('bg-slate-200', 'text-slate-700');
+                        e.target.classList.add('bg-blue-600', 'text-white');
+                    });
+                });
+            } else {
+                contentDisplay.innerHTML = `
                     <h2 class="text-3xl font-bold text-slate-900 mb-2">${data.title}</h2>
                     <p class="text-lg text-slate-600 mb-8">${data.description}</p>
                     <div id="topic-list" class="space-y-4"></div>
                     <div id="topic-detail" class="mt-8 bg-slate-50 p-6 rounded-3xl border border-slate-200"></div>
                 `;
-          const topicList = document.getElementById("topic-list");
-          data.topics.forEach((topic, index) => {
-            const listItem = document.createElement("button");
-            listItem.className =
-              "w-full text-left p-4 rounded-2xl shadow-sm border border-slate-200 bg-white transition-colors hover:bg-slate-100 topic-item";
-            listItem.setAttribute("data-topic-index", index);
-            listItem.innerHTML = `<h3 class="text-xl font-semibold text-slate-800">${topic.name}</h3>`;
-            topicList.appendChild(listItem);
-          });
+                const topicList = document.getElementById('topic-list');
+                data.topics.forEach((topic, index) => {
+                    const listItem = document.createElement('button');
+                    listItem.className = 'w-full text-left p-4 rounded-2xl shadow-sm border border-slate-200 bg-white transition-colors hover:bg-slate-100 topic-item';
+                    listItem.setAttribute('data-topic-index', index);
+                    listItem.innerHTML = `<h3 class="text-xl font-semibold text-slate-800">${topic.name}</h3>`;
+                    topicList.appendChild(listItem);
+                });
+                
+                const topicDetail = document.getElementById('topic-detail');
 
-          document.querySelectorAll(".topic-item").forEach((btn) => {
-            btn.addEventListener("click", (e) => {
-              const index = parseInt(
-                e.currentTarget.getAttribute("data-topic-index")
-              );
-              const topic = data.topics[index];
-              const detailPanel = document.getElementById("topic-detail");
+                function renderTopicDetails(index) {
+                    const topic = data.topics[index];
+                    topicDetail.innerHTML = `
+                        <h4 class="text-2xl font-bold text-slate-900 mb-3">${topic.name}</h4>
+                        <p class="text-slate-600 mb-4">${topic.explanation}</p>
+                        <h5 class="text-lg font-semibold text-slate-800 mb-2">Key Models/Algorithms:</h5>
+                        <ul class="list-disc list-inside text-slate-600 mb-4">
+                            ${topic.models.map(m => `<li>${m}</li>`).join('')}
+                        </ul>
+                        <h5 class="text-lg font-semibold text-slate-800 mb-2">Resources:</h5>
+                        <ul class="list-disc list-inside text-slate-600">
+                            ${topic.resources.map(r => `<li><a href="${r.url}" target="_blank" class="text-blue-600 hover:underline">${r.name} →</a></li>`).join('')}
+                        </ul>
+                    `;
+                }
 
-              document
-                .querySelectorAll(".topic-item")
-                .forEach((b) => b.classList.remove("list-item-active"));
-              e.currentTarget.classList.add("list-item-active");
-
-              detailPanel.innerHTML = `
-                            <h4 class="text-2xl font-bold text-slate-900 mb-3">${
-                              topic.name
-                            }</h4>
-                            <p class="text-slate-600 mb-4">${
-                              topic.explanation
-                            }</p>
-                            <h5 class="text-lg font-semibold text-slate-800 mb-2">Key Models/Algorithms:</h5>
-                            <ul class="list-disc list-inside text-slate-600 mb-4">
-                                ${topic.models
-                                  .map((m) => `<li>${m}</li>`)
-                                  .join("")}
-                            </ul>
-                            <h5 class="text-lg font-semibold text-slate-800 mb-2">Resources:</h5>
-                            <ul class="list-disc list-inside text-slate-600">
-                                ${topic.resources
-                                  .map(
-                                    (r) =>
-                                      `<li><a href="${r.url}" target="_blank" class="text-blue-600 hover:underline">${r.name} →</a></li>`
-                                  )
-                                  .join("")}
-                            </ul>
-                        `;
-            });
-          });
-
-          if (data.topics.length > 0) {
-            const firstTopicBtn = document.querySelector(".topic-item");
-            if (firstTopicBtn) {
-              firstTopicBtn.click();
+                document.querySelectorAll('.topic-item').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.topic-item').forEach(b => b.classList.remove('list-item-active'));
+                        e.currentTarget.classList.add('list-item-active');
+                        const index = parseInt(e.currentTarget.getAttribute('data-topic-index'));
+                        renderTopicDetails(index);
+                    });
+                });
+                
+                if (data.topics.length > 0) {
+                    const firstTopicBtn = document.querySelector('.topic-item');
+                    if (firstTopicBtn) {
+                        firstTopicBtn.classList.add('list-item-active');
+                        renderTopicDetails(0);
+                    }
+                }
             }
-          }
         }
-      }
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const ctx = document.getElementById("roadmap-chart").getContext("2d");
-        roadmapChart = new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: ["Phase 1", "Phase 2", "Phase 3", "Phase 4"],
-            datasets: [
-              {
-                label: "Duration in Weeks",
-                data: [4, 4, 8, 4],
-                backgroundColor: [
-                  "rgba(59, 130, 246, 0.5)",
-                  "rgba(16, 185, 129, 0.5)",
-                  "rgba(239, 68, 68, 0.5)",
-                  "rgba(249, 115, 22, 0.5)",
-                ],
-                borderColor: [
-                  "rgba(59, 130, 246, 1)",
-                  "rgba(16, 185, 129, 1)",
-                  "rgba(239, 68, 68, 1)",
-                  "rgba(249, 115, 22, 1)",
-                ],
-                borderWidth: 1,
-              },
-            ],
-          },
-          options: {
-            indexAxis: "y",
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              x: {
-                beginAtZero: true,
-                title: {
-                  display: true,
-                  text: "Weeks",
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('roadmap-chart').getContext('2d');
+            roadmapChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4'],
+                    datasets: [{
+                        label: 'Duration in Weeks',
+                        data: [4, 4, 8, 4],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.5)',
+                            'rgba(16, 185, 129, 0.5)',
+                            'rgba(239, 68, 68, 0.5)',
+                            'rgba(249, 115, 22, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(249, 115, 22, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
                 },
-              },
-            },
-            plugins: {
-              legend: {
-                display: false,
-              },
-              tooltip: {
-                callbacks: {
-                  label: function (context) {
-                    return context.label + ": " + context.parsed.x + " weeks";
-                  },
-                },
-              },
-            },
-          },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Weeks'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.parsed.x + ' weeks';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const phaseLinks = document.querySelectorAll('.phase-link');
+            phaseLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const phaseKey = e.target.getAttribute('data-phase');
+                    loadContent(phaseKey);
+                    
+                    phaseLinks.forEach(l => l.classList.remove('list-item-active'));
+                    e.target.classList.add('list-item-active');
+                });
+            });
+
+            loadContent('phase-1');
         });
-
-        const phaseLinks = document.querySelectorAll(".phase-link");
-        phaseLinks.forEach((link) => {
-          link.addEventListener("click", (e) => {
-            const phaseKey = e.target.getAttribute("data-phase");
-            loadContent(phaseKey);
-
-            phaseLinks.forEach((l) => l.classList.remove("list-item-active"));
-            e.target.classList.add("list-item-active");
-          });
-        });
-
-        loadContent("phase-1");
-      });
     </script>
-  </body>
+</body>
 </html>
